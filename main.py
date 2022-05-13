@@ -25,8 +25,7 @@ def create_user():
 
     if username and email and password:
         hashed_password = generate_password_hash(password)
-        id = mongo.db.users.insert_one(
-            {'username': username, 'email': email, 'password': hashed_password})
+        id = mongo.db.users.insert_many([{'username': username, 'email': email, 'password': hashed_password}])
         response = jsonify({
             '_id': str(id),
             'username': username,
